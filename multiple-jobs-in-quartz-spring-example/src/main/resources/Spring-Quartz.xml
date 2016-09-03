@@ -17,6 +17,7 @@
 	<bean id="jobA" class="com.mkyong.job.JobA" />
 	<bean id="jobB" class="com.mkyong.job.JobB" />
 	<bean id="jobC" class="com.mkyong.job.JobC" />
+	<bean id="autowiredA" class="com.mkyong.job.JobASpringBeanJobFactory" />
 
 	<!-- ~~~~~~~~~ Quartz Job ~~~~~~~~~~ -->
 	<bean name="JobA" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
@@ -49,9 +50,11 @@
 
 	<!-- ~~~~~~~~~~~~~~~~  Scheduler bean Factory   ~~~~~~~~~~~~~~~~ -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	<property name="jobFactory" ref="autowiredA"/> 
 		<property name="triggers">
 			<list>
 				<ref bean="cronTriggerJobA" />
+				<!-- <ref bean="autowiredA" /> -->
 				<!-- <ref bean="cronTriggerJobB" />
 				<ref bean="cronTriggerJobC" /> -->
 			</list>
